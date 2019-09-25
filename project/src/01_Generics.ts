@@ -1,22 +1,22 @@
 export { }
 
-// Exercise begins here
-type all = <A>(pred: (p: A) => boolean, array: A[]) => boolean
-const all: all = (pred, array) => array.every(pred)
-
-type when = <A>(pred: (p: A) => boolean, f: (a: A) => A, a: A) => A
+type when = (pred, f, a) => any
 const when: when = (pred, fn, a) => (pred(a) ? fn(a) : a)
 
-type applyTo = <A, B>(a: A, fn: (a: A) => B) => B
+// Exercise begins here
+type all = (pred, array) => any
+const all: all = (pred, array) => array.every(pred)
+
+type applyTo = (a, fn) => any
 const applyTo: applyTo = (a, fn) => fn(a)
 
-type map = <A, B>(f: (f: A) => B, a: A[]) => B[]
+type map = (f, a) => any[]
 const map: map = (f, a) => a.map(f)
 
-type zipWith = <A, B, C>(f: (a: A, b: B) => C, as: A[], bs: B[]) => C[]
+type zipWith = (f, as, bs) => any[]
 const zipWith: zipWith = (f, a, b) => a.map((e, i) => f(e, b[i]))
 
-type compose = <A, B, C>(f: (b: B) => C, g: (a: A) => B, a: A) => C
+type compose = (f, g, a) => any
 const compose: compose = (f, g, a) => f(g(a))
 
 // These are just test cases to ensure that you give the generic type
