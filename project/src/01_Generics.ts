@@ -4,19 +4,31 @@ type when = (pred, f, a) => any
 const when: when = (pred, fn, a) => (pred(a) ? fn(a) : a)
 
 // Exercise begins here
-type all = (pred, array) => any
+
+// Beginner ============================================
+type all = (pred: (a: string) => boolean, array: string[]) => boolean
 const all: all = (pred, array) => array.every(pred)
 
-type applyTo = (a, fn) => any
+type applyTo = (a: string, fn: (a: string) => string) => string
 const applyTo: applyTo = (a, fn) => fn(a)
 
-type map = (f, a) => any[]
+
+// Intermediate ========================================
+type map = (f: (s: string) => number, a: string[]) => number[]
 const map: map = (f, a) => a.map(f)
 
-type zipWith = (f, as, bs) => any[]
+type zipWith = (f: (s: string, n: number) => boolean
+  , as: string[]
+  , bs: number[]
+) => boolean[]
 const zipWith: zipWith = (f, a, b) => a.map((e, i) => f(e, b[i]))
 
-type compose = (f, g, a) => any
+// Advanced ===========================================
+type compose =
+  (f: (s: string) => number
+    , g: (n: number) => string
+    , a: number
+  ) => any
 const compose: compose = (f, g, a) => f(g(a))
 
 // These are just test cases to ensure that you give the generic type
