@@ -1,28 +1,30 @@
 {
-	"extends": "tslint:recommended",
-	"rules": {
-		"max-line-length": {
-			"options": [80]
-		},
-		"max-classes-per-file": false,
-		"object-literal-sort-keys": false,
-		"new-parens": true,
-		"no-arg": true,
-		"no-bitwise": false,
-		"interface-name": [true, "never-prefix"],
-		"indent": [true, "spaces", 4],
-		"no-conditional-assignment": true,
-		"no-consecutive-blank-lines": false,
-		"no-console": {
-			"severity": "warning",
-			"options": ["debug", "info", "log", "time", "timeEnd", "trace"]
-		},
-		"ordered-imports": false,
-		"semicolon": [true, "never"]
-	},
-	"jsRules": {
-		"max-line-length": {
-			"options": [180]
-		}
-	}
+  "extends": "tslint:recommended",
+  "rules": {
+    "max-line-length": {
+      "options": [80]
+    },
+    "align": false,
+    "trailing-comma": false,
+    "max-classes-per-file": false,
+    "object-literal-sort-keys": false,
+    "new-parens": true,
+    "no-arg": true,
+    "no-bitwise": false,
+    "interface-name": [true, "never-prefix"],
+    "indent": [true, "spaces", 4],
+    "no-conditional-assignment": true,
+    "no-consecutive-blank-lines": false,
+    "no-console": {
+      "severity": "warning",
+      "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+    },
+    "ordered-imports": false,
+    "semicolon": [true, "never"]
+  },
+  "jsRules": {
+    "max-line-length": {
+      "options": [180]
+    }
+  }
 }
