@@ -145,7 +145,8 @@ const thermostat = <T>(
   temperature,
   useCelsius,
   sensors,
-  name
+  name,
+  settings
 })
 ```
 # Exercise: 1_Generics.ts
@@ -188,6 +189,7 @@ type Squads = "SmartBuildings"
 
 type Nums = 1 | 2 | 3
 type MyBool = true | false
+type BoolOrNum = MyBool | Num
 ```
 - Typescript does not give you an algebraic sum type out of the box
 - For that we need a tagged/discriminated union
@@ -312,6 +314,13 @@ const fst = ({first}) => first
 const snd = ({second}) => second
 ```
 
+```typescript
+type Nums = 1 | 2 | 3
+type MyBool = true | false
+
+const boolAndNum: Pair<MyBool, Num> = ...
+```
+
 - This is less interesting than discriminated unions because you are guaranteed to have both members
 
 ### Logic && Math
@@ -345,6 +354,67 @@ const snd = ({second}) => second
           /       \
          a         b
 ```
+
+## A Heuristic for Complexity
+- Sum type is addtion of the constitutent cardinalities
+- Product type is multiplication of the constituent cardinalities
+- This gives us a rough estimate of the complexity of our program
+
+- That's why this...
+```typescript
+type Off = false
+type On = true
+type Flag = On | Off
+
+interface State {
+  isLoading: Flag
+  isError: Flag
+  isSuccess: Flag
+}
+
+const state: State = {
+  isLoading: On
+  isError: Off
+  isSuccess: Off
+}
+```
+
+- is better than this
+```typescript
+interface State {
+  isLoading: string
+  isError: string
+  isSuccess: string
+}
+
+const state: State = {
+  isLoading: "On"
+  isError: "Off"
+  isSuccess: "Off"
+}
+```
+
+## But really this is best
+```typescript
+interface Loading {
+  state: "Loading"
+}
+
+interface Error {
+  state: "Error"
+}
+
+interface Success {
+  state: "Success"
+}
+
+type ComponentState = Loading | Error | Success
+
+const state: ComponentState = ...
+```
+
+
+
 
 # Representing Complex Data with ADTS
 
@@ -496,7 +566,7 @@ X - f g h i j k <- data
 - This allows us to:
     - Pass functions as arguments
     - Accept functions as arguments
-    - return functions as results
+    - Return functions as results
 
 ## Callbacks and Higher Order Functions
 ```typescript
@@ -616,7 +686,7 @@ E2 :: a -> b -> a
 - Constant
 
 ```typescript
-type E3 = <A, B, C>(f: (b: B) => C) => (g: (a: A) => C) => C
+type E3 = <A, B, C>(f: (b: B) => C) => (g: (a: A) => C) => (a: A) => C
 ```
 ```haskell
 E3 :: (b -> c) -> (a -> b) -> (a -> c)
